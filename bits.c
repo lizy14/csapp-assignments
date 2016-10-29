@@ -174,7 +174,23 @@ int logicalShift(int x, int n) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  return 2;
+  int i, j, k, l, m;
+
+  i = 0x55 | (0x55 << 8);
+  i = i | (i << 16);
+  j = 0x33 | (0x33 << 8);
+  j = j | (j << 16);
+  k = 0x0f | (0x0f << 8);
+  k = k | (k << 16);
+  l = 0xff | (0xff << 16);
+  m = 0xff | (0xff << 8);
+
+  x = (x & i) + ((x >> 1) & i);
+  x = (x & j) + ((x >> 2) & j);
+  x = (x & k) + ((x >> 4) & k);
+  x = (x & l) + ((x >> 8) & l);
+  x = (x & m) + ((x >> 16) & m);
+  return x;
 }
 /*
  * bang - Compute !x without using !
@@ -269,8 +285,32 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4
  */
 int ilog2(int x) {
-  return 2;
+  int i, j, k, l, m;
+  i = 0x55 | (0x55 << 8);
+  i = i | (i << 16);
+  j = 0x33 | (0x33 << 8);
+  j = j | (j << 16);
+  k = 0x0f | (0x0f << 8);
+  k = k | (k << 16);
+  l = 0xff | (0xff << 16);
+  m = 0xff | (0xff << 8);
+
+  x = x | (x >> 1);
+  x = x | (x >> 2);
+  x = x | (x >> 4);
+  x = x | (x >> 8);
+  x = x | (x >> 16);
+
+  x = (x & i) + ((x >> 1) & i);
+  x = (x & j) + ((x >> 2) & j);
+  x = (x & k) + ((x >> 4) & k);
+  x = (x & l) + ((x >> 8) & l);
+  x = (x & m) + ((x >> 16) & m);
+  x = x + ~0;
+
+  return x;
 }
+
 /*
  * float_neg - Return bit-level equivalent of expression -f for
  *   floating point argument f.

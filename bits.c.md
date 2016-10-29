@@ -14,6 +14,8 @@ we cannot change the order, unless we know the right-shift is logical.
 * clear the higher bits with a mask
 
 ## bitCount
+Adds neighboring bits together in groups of 1, then 2, then 4, up to 32, in 5 steps.
+reference: http://stackoverflow.com/a/3815253
 
 ## bang
 the sign bit of `x` and `-x` are both `0` if and only if `x==0`.
@@ -48,6 +50,9 @@ Ignoring overflow, we have `x <= y` if and only if `y-x >= 0`, in which case we 
 For overflow scenario, we look at bit signs of both operands.
 
 ## ilog2
+* "fold" the upper bits into the lower bits to construct a bit vector with the same most significant 1 as x, but all 1's below it
+* then count number of 1's
+reference: http://stackoverflow.com/a/21442682
 
 ## float_neg
 
