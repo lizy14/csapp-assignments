@@ -40,6 +40,8 @@ by definition, `-x == ~x + 1` for all `x` as integer
 * exclude zero
 
 ## isLessOrEqual
+Ignoring overflow, we have `x <= y` if and only if `y-x >= 0`, in which case we just look at the sign bit of the difference
+For overflow scenario, we look at bit signs of both operands.
 
 ## ilog2
 
