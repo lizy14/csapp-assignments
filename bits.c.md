@@ -27,6 +27,8 @@ for 1-bit operand(s), we have
 msb = 1, other bits = 0.
 
 ## fitsBits
+* drop the right-most `n-1` bits
+* check if the remaining part is all zero's or all one's
 
 ## divpwr2
 

@@ -210,7 +210,9 @@ int tmin(void) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-  return 2;
+  int n_ = n + ~0; // minus 1
+  int x_ = x >> n_; //higher bits
+  return ( (!x_) | (!(x_+1)) ); //all zero or all one
 }
 /*
  * divpwr2 - Compute x/(2^n), for 0 <= n <= 30
