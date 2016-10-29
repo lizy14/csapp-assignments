@@ -1,0 +1,175 @@
+
+\documentclass{article}
+
+\input{template}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Chapter\ 2\ Assignmnet\ 2} % Assignment title
+\newcommand{\hmwkDueDate}{16\ October,\ 2016} % Due date
+\newcommand{\hmwkClass}{Architecture} % Course/class
+\newcommand{\hmwkAuthorName}{Zhaoyang Li (2014013432)\ } % Your name
+\def\code#1{\texttt{#1}}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+CSAPP Problem 2.82 \
+\\
+
+\problemAnswer{
+
+\subsection{A}
+
+\[
+\begin{aligned}
+Y
+& = \sum_{i=1}^{+\infty}{\frac{y}{2^{ki}}} \\
+& = \lim_{n\to +\infty}{\left(\frac{y}{2^k-1}-\frac{2^{-k n} y}{2^k-1}\right)} \\
+& = \frac{y}{2^k-1}
+\end{aligned}
+\]
+
+\subsection{B}
+\subsubsection{110}
+$y=5, k=3, Y=\frac{5}{7}$
+
+\subsubsection{0110}
+$y=6, k=4, Y=\frac{2}{5}$
+
+\subsubsection{010011}
+$y=19, k=6, Y=\frac{19}{63}$
+
+}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+CSAPP Problem 2.85
+
+\begin{tabular}{lccl}
+\hline
+& E & M & V\\
+\hline
+Smallest positive denormalized& $-16382$ & $\frac1{9223372036854775808}$ & $3.645199531882475\times 10^{-4951}$ \\
+Smallest positive normalized  & $-16382$ & $\frac{9223372036854775809}{9223372036854775808}$ & $3.362103143112094\times 10^{-4932}$ \\
+Largest normalized            & $16383$  & $\frac{18446744073709551615}{9223372036854775808}$ & $1.189731495357232\times 10^{4932}$ \\
+\hline
+\end{tabular}
+
+
+\subsection{Smallest positive denormalized}\problemAnswer{
+
+\code{0x00000000000000000001}
+
+\[
+\begin{aligned}
+S &= 0,\\
+E &= 1-\left(2^{15-1}-1\right) \\
+  &= -16382, \\
+M &= 0 + \frac1{2^{63}} \\
+  &= \frac1{9223372036854775808}. \\
+V &= \left(-1\right)^S\times M \times 2^E \\
+  &= 3.645199531882475\times 10^{-4951}
+\end{aligned}
+\]
+
+}
+
+\subsection{Smallest positive normalized}\problemAnswer{
+
+\code{0x00010000000000000001}
+
+\[
+\begin{aligned}
+S &= 0,\\
+E &= 1-\left(2^{15-1}-1\right) \\
+  &= -16382, \\
+M &= 1 + \frac1{2^{63}} \\
+  &= \frac{9223372036854775809}{9223372036854775808}. \\
+V &= \left(-1\right)^S\times M \times 2^E \\
+  &\approx 3.362103143112094\times 10^{-4932}.
+\end{aligned}
+\]
+
+}
+
+\subsection{Largest normalized}\problemAnswer{
+\code{0x7FFFFFFFFFFFFFFFFF}
+
+\[
+\begin{aligned}
+S &= 0,\\
+E &= \left(\left(2^{15}-1\right)-1\right)-\left(2^{15-1}-1\right) \\
+  &= 16383, \\
+M &= 1 + \sum_{i=1}^{63}{\frac{1}{2^i}} \\
+  &= \frac{18446744073709551615}{9223372036854775808}. \\
+V &= \left(-1\right)^S\times M \times 2^E \\
+  &\approx 5.948657476786154\times 10^{4931}.
+\end{aligned}
+\]
+
+
+}
+
+\end{homeworkProblem}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+CSAPP Problem 2.87 \
+\\
+
+\problemAnswer{
+
+\begin{tabular}{cccc}
+\hline
+Bits in Format A& Value in Format A& Bits in Format B& Value in Format B\\
+\hline
+\code{1 01111 001}& $\frac{-9}{8}$& \code{1 0111 0010}& $\frac{-9}{8}$\\
+
+\code{0 10110 011}& $176$& \code{0 1110 0110}& $176$\\
+\code{1 00111 010}& $\frac{-5}{2^{10}}$& \code{1 0000 0101}& $\frac{-5}{2^{10}}$\\
+\code{0 00000 111}& $\frac{7}{2^{17}}$& \code{0 0000 0001}& $\frac{1}{2^{10}}$\\
+\code{1 11100 000}& $-8192$& \code{1 1110 1111}& $-248$\\
+\code{0 10111 100}& $384$& \code{0 1111 0000}& $+\infty$\\
+
+\hline
+\end{tabular}
+
+}
+
+\end{homeworkProblem}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
+
