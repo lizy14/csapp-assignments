@@ -16,15 +16,15 @@ we cannot change the order, unless we know the right-shift is logical.
 ## bitCount
 
 ## bang
-the most significant bit of `x` and `-x` are both `0` if and only if `x==0`.
-* get the msb of `x`
-* get the msb of `-x`
+the sign bit of `x` and `-x` are both `0` if and only if `x==0`.
+* get the sign bit of `x`
+* get the sign bit of `-x`
 for 1-bit operand(s), we have
 * `x||y == x|y`
 * `!x   == (x+1) & 1`
 
 ## tmin
-msb = 1, other bits = 0.
+sign bit = 1, other bits = 0.
 
 ## fitsBits
 * drop the right-most `n-1` bits
