@@ -31,6 +31,10 @@ sign bit = 1, other bits = 0.
 * check if the remaining part is all zero's or all one's
 
 ## divpwr2
+`x >> n` works perfectly fine for positive dividends.
+For negative dividends we have to take care of rounding manually:
+* the remainder is the last `n` bits of the dividend; all we need is a mask
+* if there is a non-zero remainder, we add `1` to the result
 
 ## negate
 by definition, `-x == ~x + 1` for all `x` as integer

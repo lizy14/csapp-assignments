@@ -222,9 +222,12 @@ int fitsBits(int x, int n) {
  *   Max ops: 15
  *   Rating: 2
  */
-int divpwr2(int x, int n) {
-    return 2;
-}
+ int divpwr2(int x, int n) {
+ 	int x_is_negative = (x >> 31) & 1;
+ 	int m = (1 << n) + (~1) + 1;
+ 	int remainder_present = !!(m & x);
+ 	return (x >> n) + (x_is_negative & remainder_present);
+ }
 /*
  * negate - return -x
  *   Example: negate(1) = -1.
