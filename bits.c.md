@@ -60,5 +60,19 @@ reference: http://stackoverflow.com/a/21442682
 * check if the input is NaN. is so, revert changes
 
 ## float_i2f
+* first of all, handle the special case where `x==0`
+* extract the sign bit and the absolute value bits
+* calculate with a loop such that there is an implied leading `1` to get the `exp` and `frac` parts
+* handle cases of denormalization and rounding
 
 ## float_twice
+* first we extract the sign bit, `exp` bits and `frac` bits
+* then
+    * for normalized values, we
+        * increase the `exp` part
+        * if a overflow occurs, clear the `frac` part to represent infinity
+    * for denormalized values, we
+        * left-shift the `frac` part by 1
+        * if it becomes too big to be a denormalized value, drop the higher bits and increase the `exp` part
+    * for infinity or NaN, we do nothing.
+* finally we assemble the `sign` bit, `exp` bits and `frac` bits

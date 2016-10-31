@@ -341,9 +341,40 @@ unsigned float_neg(unsigned uf) {
  *   Max ops: 30
  *   Rating: 4
  */
-unsigned float_i2f(int x) {
-  return 2;
-}
+ unsigned float_i2f(int x) {
+ 	int exp, frac, sign;
+ 	int abs;
+
+ 	int int_msb_mask = 1 << 31;
+ 	int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
+
+ 	sign = x > 0 ? 0 : 1;
+ 	abs = x > 0 ? x : -x;
+
+ 	if (abs == 0) {
+ 		return 0;
+ 	}
+
+ 	exp = 158; /* 127 + 31 */
+
+ 	while ((abs & int_msb_mask) == 0) {
+ 		abs <<= 1;
+ 		exp --;
+ 	}
+ 	frac = (abs >> 8) & frac_mask;
+
+ 	/* rounding */
+ 	if ((abs & 0xFF) > 0x80 || ((abs & 0xFF) == 0x80 && (frac & 1))) {
+ 		frac ++;
+ 		if (frac > frac_mask) {
+ 			frac &= frac_mask;
+ 			frac >>= 1;
+ 			exp ++;
+ 		}
+ 	}
+
+ 	return (sign << 31) | (exp << 23) | frac;
+ }
 /*
  * float_twice - Return bit-level equivalent of expression 2*f for
  *   floating point argument f.
@@ -355,6 +386,32 @@ unsigned float_i2f(int x) {
  *   Max ops: 30
  *   Rating: 4
  */
-unsigned float_twice(unsigned uf) {
-  return 2;
-}
+ unsigned float_twice(unsigned uf) {
+ 	int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
+ 	int exp_mask = 0xFF;
+ 	int sign = uf >> 31;
+ 	int exp = (uf >> 23) & exp_mask;
+ 	int frac = uf & frac_mask;
+
+ 	if (exp != 0 && exp < exp_mask) {
+ 		/* normalized value */
+ 		exp++;
+ 		if (exp >= exp_mask) {
+ 			frac = 0;
+ 		}
+ 	}
+ 	else if (exp == 0) {
+ 		/* denormalized value */
+ 		frac <<= 1;
+ 		if (frac > frac_mask) {
+ 			frac &= frac_mask;
+ 			exp ++;
+ 		}
+ 	}
+ 	else {
+ 		/* infinity or NaN */
+ 		;
+ 	}
+
+ 	return (sign << 31) | (exp << 23) | frac;
+ }
