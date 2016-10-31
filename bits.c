@@ -323,7 +323,14 @@ int ilog2(int x) {
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
- return 2;
+  int mask = 1 << 31; // sign bit
+  int result = uf ^ mask; // toggle sign bit
+  int threshold = (0x7F << 24) | (0x80 << 16);// 0x7F800000
+  int abs = uf & (~mask); //clear sign bit
+  if (abs > threshold){ /*NaN*/
+    result = uf;
+  }
+  return result;
 }
 /*
  * float_i2f - Return bit-level equivalent of expression (float) x

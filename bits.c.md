@@ -55,6 +55,9 @@ For overflow scenario, we look at bit signs of both operands.
 reference: http://stackoverflow.com/a/21442682
 
 ## float_neg
+* get a mask for the sign bit
+* toggle the sign bit
+* check if the input is NaN. is so, revert changes
 
 ## float_i2f
 
