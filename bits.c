@@ -131,6 +131,7 @@ NOTES:
 
 
 #endif
+
 /*
  * bitAnd - x&y using only ~ and |
  *   Example: bitAnd(6, 5) = 4
@@ -139,7 +140,7 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
-  return ~((~x)|(~y));
+        return ~((~x)|(~y));
 }
 /*
  * getByte - Extract byte n from word x
@@ -150,9 +151,9 @@ int bitAnd(int x, int y) {
  *   Rating: 2
  */
 int getByte(int x, int n) {
-  int b = n << 3;   //number of bits
-  int m = 255; //mask
-  return (x >> b) & m;
+        int b = n << 3; //number of bits
+        int m = 255; //mask
+        return (x >> b) & m;
 }
 /*
  * logicalShift - shift x to the right by n, using a logical shift
@@ -163,8 +164,8 @@ int getByte(int x, int n) {
  *   Rating: 3
  */
 int logicalShift(int x, int n) {
-  x = x >> n;
-  return x & (~(((1 << 31) >> n) << 1));
+        x = x >> n;
+        return x & (~(((1 << 31) >> n) << 1));
 }
 /*
  * bitCount - returns count of number of 1's in word
@@ -174,23 +175,23 @@ int logicalShift(int x, int n) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  int i, j, k, l, m;
+        int i, j, k, l, m;
 
-  i = 0x55 | (0x55 << 8);
-  i = i | (i << 16);
-  j = 0x33 | (0x33 << 8);
-  j = j | (j << 16);
-  k = 0x0f | (0x0f << 8);
-  k = k | (k << 16);
-  l = 0xff | (0xff << 16);
-  m = 0xff | (0xff << 8);
+        i = 0x55 | (0x55 << 8);
+        i = i | (i << 16);
+        j = 0x33 | (0x33 << 8);
+        j = j | (j << 16);
+        k = 0x0f | (0x0f << 8);
+        k = k | (k << 16);
+        l = 0xff | (0xff << 16);
+        m = 0xff | (0xff << 8);
 
-  x = (x & i) + ((x >> 1) & i);
-  x = (x & j) + ((x >> 2) & j);
-  x = (x & k) + ((x >> 4) & k);
-  x = (x & l) + ((x >> 8) & l);
-  x = (x & m) + ((x >> 16) & m);
-  return x;
+        x = (x & i) + ((x >> 1) & i);
+        x = (x & j) + ((x >> 2) & j);
+        x = (x & k) + ((x >> 4) & k);
+        x = (x & l) + ((x >> 8) & l);
+        x = (x & m) + ((x >> 16) & m);
+        return x;
 }
 /*
  * bang - Compute !x without using !
@@ -200,12 +201,12 @@ int bitCount(int x) {
  *   Rating: 4
  */
 int bang(int x) {
-  int y = ~x + 1; //-x
-  x >>= 31;
-  x &= 1;
-  y >>= 31;
-  y &= 1;
-  return ((x | y) + 1) & 1;
+        int y = ~x + 1; //-x
+        x >>= 31;
+        x &= 1;
+        y >>= 31;
+        y &= 1;
+        return ((x | y) + 1) & 1;
 }
 /*
  * tmin - return minimum two's complement integer
@@ -214,7 +215,7 @@ int bang(int x) {
  *   Rating: 1
  */
 int tmin(void) {
-  return 1 << 31;
+        return 1 << 31;
 }
 /*
  * fitsBits - return 1 if x can be represented as an
@@ -226,9 +227,9 @@ int tmin(void) {
  *   Rating: 2
  */
 int fitsBits(int x, int n) {
-  int n_ = n + ~0; // minus 1
-  int x_ = x >> n_; //higher bits
-  return ( (!x_) | (!(x_+1)) ); //all zero or all one
+        int n_ = n + ~0; // minus 1
+        int x_ = x >> n_; //higher bits
+        return ( (!x_) | (!(x_+1)) ); //all zero or all one
 }
 /*
  * divpwr2 - Compute x/(2^n), for 0 <= n <= 30
@@ -238,12 +239,12 @@ int fitsBits(int x, int n) {
  *   Max ops: 15
  *   Rating: 2
  */
- int divpwr2(int x, int n) {
- 	int x_is_negative = (x >> 31) & 1;
- 	int m = (1 << n) + (~1) + 1;
- 	int remainder_present = !!(m & x);
- 	return (x >> n) + (x_is_negative & remainder_present);
- }
+int divpwr2(int x, int n) {
+        int x_is_negative = (x >> 31) & 1;
+        int m = (1 << n) + (~1) + 1;
+        int remainder_present = !!(m & x);
+        return (x >> n) + (x_is_negative & remainder_present);
+}
 /*
  * negate - return -x
  *   Example: negate(1) = -1.
@@ -252,7 +253,7 @@ int fitsBits(int x, int n) {
  *   Rating: 2
  */
 int negate(int x) {
-  return ~x + 1;
+        return ~x + 1;
 }
 /*
  * isPositive - return 1 if x > 0, return 0 otherwise
@@ -262,7 +263,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isPositive(int x) {
-  return !(x & (1<<31)) & !!x;
+        return !(x & (1<<31)) & !!x;
 }
 /*
  * isLessOrEqual - if x <= y  then return 1, else return 0
@@ -272,10 +273,10 @@ int isPositive(int x) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  int neg_x_pos_y = !!((x >> 31) & !(y >> 31));
-  int same_sign = !((x >> 31) ^ (y >> 31));
-  int pos_diff = !((y + (~x + 1)) >> 31);
-  return neg_x_pos_y | (same_sign & pos_diff);
+        int neg_x_pos_y = !!((x >> 31) & !(y >> 31));
+        int same_sign = !((x >> 31) ^ (y >> 31));
+        int pos_diff = !((y + (~x + 1)) >> 31);
+        return neg_x_pos_y | (same_sign & pos_diff);
 }
 /*
  * ilog2 - return floor(log base 2 of x), where x > 0
@@ -285,30 +286,30 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4
  */
 int ilog2(int x) {
-  int i, j, k, l, m;
-  i = 0x55 | (0x55 << 8);
-  i = i | (i << 16);
-  j = 0x33 | (0x33 << 8);
-  j = j | (j << 16);
-  k = 0x0f | (0x0f << 8);
-  k = k | (k << 16);
-  l = 0xff | (0xff << 16);
-  m = 0xff | (0xff << 8);
+        int i, j, k, l, m;
+        i = 0x55 | (0x55 << 8);
+        i = i | (i << 16);
+        j = 0x33 | (0x33 << 8);
+        j = j | (j << 16);
+        k = 0x0f | (0x0f << 8);
+        k = k | (k << 16);
+        l = 0xff | (0xff << 16);
+        m = 0xff | (0xff << 8);
 
-  x = x | (x >> 1);
-  x = x | (x >> 2);
-  x = x | (x >> 4);
-  x = x | (x >> 8);
-  x = x | (x >> 16);
+        x = x | (x >> 1);
+        x = x | (x >> 2);
+        x = x | (x >> 4);
+        x = x | (x >> 8);
+        x = x | (x >> 16);
 
-  x = (x & i) + ((x >> 1) & i);
-  x = (x & j) + ((x >> 2) & j);
-  x = (x & k) + ((x >> 4) & k);
-  x = (x & l) + ((x >> 8) & l);
-  x = (x & m) + ((x >> 16) & m);
-  x = x + ~0;
+        x = (x & i) + ((x >> 1) & i);
+        x = (x & j) + ((x >> 2) & j);
+        x = (x & k) + ((x >> 4) & k);
+        x = (x & l) + ((x >> 8) & l);
+        x = (x & m) + ((x >> 16) & m);
+        x = x + ~0;
 
-  return x;
+        return x;
 }
 
 /*
@@ -323,14 +324,14 @@ int ilog2(int x) {
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
-  int mask = 1 << 31; // sign bit
-  int result = uf ^ mask; // toggle sign bit
-  int threshold = (0x7F << 24) | (0x80 << 16);// 0x7F800000
-  int abs = uf & (~mask); //clear sign bit
-  if (abs > threshold){ /*NaN*/
-    result = uf;
-  }
-  return result;
+        int mask = 1 << 31; // sign bit
+        int result = uf ^ mask; // toggle sign bit
+        int threshold = (0x7F << 24) | (0x80 << 16);// 0x7F800000
+        int abs = uf & (~mask); //clear sign bit
+        if (abs > threshold) { /*NaN*/
+                result = uf;
+        }
+        return result;
 }
 /*
  * float_i2f - Return bit-level equivalent of expression (float) x
@@ -341,40 +342,40 @@ unsigned float_neg(unsigned uf) {
  *   Max ops: 30
  *   Rating: 4
  */
- unsigned float_i2f(int x) {
- 	int exp, frac, sign;
- 	int abs;
+unsigned float_i2f(int x) {
+        int exp, frac, sign;
+        int abs;
 
- 	int int_msb_mask = 1 << 31;
- 	int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
+        int int_msb_mask = 1 << 31;
+        int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
 
- 	sign = x > 0 ? 0 : 1;
- 	abs = x > 0 ? x : -x;
+        sign = x > 0 ? 0 : 1;
+        abs = x > 0 ? x : -x;
 
- 	if (abs == 0) {
- 		return 0;
- 	}
+        if (abs == 0) {
+                return 0;
+        }
 
- 	exp = 158; /* 127 + 31 */
+        exp = 158; /* 127 + 31 */
 
- 	while ((abs & int_msb_mask) == 0) {
- 		abs <<= 1;
- 		exp --;
- 	}
- 	frac = (abs >> 8) & frac_mask;
+        while ((abs & int_msb_mask) == 0) {
+                abs <<= 1;
+                exp --;
+        }
+        frac = (abs >> 8) & frac_mask;
 
- 	/* rounding */
- 	if ((abs & 0xFF) > 0x80 || ((abs & 0xFF) == 0x80 && (frac & 1))) {
- 		frac ++;
- 		if (frac > frac_mask) {
- 			frac &= frac_mask;
- 			frac >>= 1;
- 			exp ++;
- 		}
- 	}
+        /* rounding */
+        if ((abs & 0xFF) > 0x80 || ((abs & 0xFF) == 0x80 && (frac & 1))) {
+                frac ++;
+                if (frac > frac_mask) {
+                        frac &= frac_mask;
+                        frac >>= 1;
+                        exp ++;
+                }
+        }
 
- 	return (sign << 31) | (exp << 23) | frac;
- }
+        return (sign << 31) | (exp << 23) | frac;
+}
 /*
  * float_twice - Return bit-level equivalent of expression 2*f for
  *   floating point argument f.
@@ -386,32 +387,32 @@ unsigned float_neg(unsigned uf) {
  *   Max ops: 30
  *   Rating: 4
  */
- unsigned float_twice(unsigned uf) {
- 	int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
- 	int exp_mask = 0xFF;
- 	int sign = uf >> 31;
- 	int exp = (uf >> 23) & exp_mask;
- 	int frac = uf & frac_mask;
+unsigned float_twice(unsigned uf) {
+        int frac_mask = (1 << 23) - 1; /* 0x7FFFFF */
+        int exp_mask = 0xFF;
+        int sign = uf >> 31;
+        int exp = (uf >> 23) & exp_mask;
+        int frac = uf & frac_mask;
 
- 	if (exp != 0 && exp < exp_mask) {
- 		/* normalized value */
- 		exp++;
- 		if (exp >= exp_mask) {
- 			frac = 0;
- 		}
- 	}
- 	else if (exp == 0) {
- 		/* denormalized value */
- 		frac <<= 1;
- 		if (frac > frac_mask) {
- 			frac &= frac_mask;
- 			exp ++;
- 		}
- 	}
- 	else {
- 		/* infinity or NaN */
- 		;
- 	}
+        if (exp != 0 && exp < exp_mask) {
+                /* normalized value */
+                exp ++;
+                if (exp >= exp_mask) {
+                        frac = 0;
+                }
+        }
+        else if (exp == 0) {
+                /* denormalized value */
+                frac <<= 1;
+                if (frac > frac_mask) {
+                        frac &= frac_mask;
+                        exp ++;
+                }
+        }
+        else {
+                /* infinity or NaN */
+                ;
+        }
 
- 	return (sign << 31) | (exp << 23) | frac;
- }
+        return (sign << 31) | (exp << 23) | frac;
+}
