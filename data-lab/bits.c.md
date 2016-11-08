@@ -1,4 +1,6 @@
-# CSAPP
+# Data Lab: Manipulating Bits
+Architecture, Fall 2016
+
 Zhaoyang Li, 201401342
 
 ## bitAnd

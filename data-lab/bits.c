@@ -360,17 +360,17 @@ unsigned float_i2f(int x) {
 
         while ((abs & int_msb_mask) == 0) {
                 abs <<= 1;
-                exp --;
+                exp--;
         }
         frac = (abs >> 8) & frac_mask;
 
         /* rounding */
         if ((abs & 0xFF) > 0x80 || ((abs & 0xFF) == 0x80 && (frac & 1))) {
-                frac ++;
+                frac++;
                 if (frac > frac_mask) {
                         frac &= frac_mask;
                         frac >>= 1;
-                        exp ++;
+                        exp++;
                 }
         }
 
@@ -396,7 +396,7 @@ unsigned float_twice(unsigned uf) {
 
         if (exp != 0 && exp < exp_mask) {
                 /* normalized value */
-                exp ++;
+                exp++;
                 if (exp >= exp_mask) {
                         frac = 0;
                 }
@@ -406,7 +406,7 @@ unsigned float_twice(unsigned uf) {
                 frac <<= 1;
                 if (frac > frac_mask) {
                         frac &= frac_mask;
-                        exp ++;
+                        exp++;
                 }
         }
         else {
