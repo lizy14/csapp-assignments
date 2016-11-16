@@ -2,7 +2,7 @@
 
 Zhaoyang Li, 2014013432
 
-Nov. 8. 2016
+Nov. 8, 2016
 
 ## Level 0
 
@@ -29,7 +29,7 @@ In conclusion, our exploit code starts with machine code of instructions
 	a:  68 82 8b 04 08          push   0x8048b82
 	f:  c3                      ret
 
-in my casefollowed by some bytes of arbitary characters, making the following `0x55683a58` the 45th byte in the string.
+followed by some bytes of arbitary characters, making the following `0x55683a58` the 45th byte in the string.
 
 ## Level 3
 
@@ -49,7 +49,7 @@ followed by some bytes of arbitary characters, making the following `0x55683a58`
 ## Level 4
 
 * `mov` the cookie into `eax`,
-* restore stack frame by an `lea` instruction to load the desired address,,
+* restore stack frame with an `lea` instruction to load the desired address,,
 * `push` and `ret` instructions to take us back to the caller.
 
 Code snippet:
