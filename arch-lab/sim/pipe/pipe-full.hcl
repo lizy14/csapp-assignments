@@ -1,3 +1,10 @@
+# Zhaoyang Li
+# 2014013432
+
+# comments supposed to be here
+# are same as those found in ../seq/seq-full.hcl
+
+
 #/* $begin pipe-all-hcl */
 ####################################################################
 #    HCL Description of Control for Pipelined Y86 Processor        #
